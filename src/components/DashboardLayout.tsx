@@ -25,7 +25,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Top navigation */}
+      {/* Top navigation 
+     
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -38,7 +39,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
               </div>
             </div>
             
-            {/* User profile dropdown */}
+            {/* User profile dropdown 
             <div className="flex items-center">
               <div className="ml-3 relative flex items-center">
                 <div className="flex items-center">
@@ -57,7 +58,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                 </div>
               </div>
               
-              {/* Mobile menu button */}
+              {/* Mobile menu button 
               <div className="md:hidden ml-3">
                 <button
                   type="button"
@@ -76,6 +77,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           </div>
         </div>
       </nav>
+      */}
 
       <div className="flex">
         {/* Sidebar */}

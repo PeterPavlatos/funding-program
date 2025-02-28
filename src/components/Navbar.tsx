@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, DollarSign } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, DollarSign, LogOut } from 'lucide-react';
+import { mockUser } from '../data/mockData';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
@@ -8,28 +9,49 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const { isAuthenticated, logout } = useAuth();
   const isDashboard = location.pathname.includes('/dashboard');
+  const navigate = useNavigate();
+  // const handleLogout = async () => {
+  //   try {
+  //     await logout();
+  //     setIsOpen(false);
+  //   } catch (error) {
+  //     console.error('Error logging out:', error);
+  //   }
+  // };
 
   const handleLogout = async () => {
     try {
       await logout();
-      setIsOpen(false);
+      navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);
     }
   };
 
+
   return (
+
+    
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
+
+            {!isAuthenticated ? 
               <Link to="/" className="flex items-center">
                 <DollarSign className="h-8 w-8 text-blue-600" />
-                <span className="ml-2 text-xl font-bold text-gray-900">FundingFinder</span>
+                <span className="ml-2 text-xl font-bold text-gray-900">FundingFinder test</span>
               </Link>
+              :
+              <Link to="/dashboard" className="flex items-center">
+                  <DollarSign className="h-8 w-8 text-blue-600" />
+                  <span className="ml-2 text-xl font-bold text-gray-900">FundingFinder</span>
+                </Link>
+            }
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            {!isAuthenticated &&(<>
               <Link
                 to="/"
                 className={`${
@@ -60,17 +82,17 @@ const Navbar: React.FC = () => {
               >
                 Pricing
               </Link>
-              {isAuthenticated && (
-                <Link
-                  to="/dashboard"
-                  className={`${
-                    isDashboard 
-                      ? 'border-blue-500 text-gray-900' 
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-                >
-                  Dashboard
-                </Link>
+               <Link
+                to="/dashboard"
+                className={`${
+                  location.pathname === '/dashboard' 
+                    ? 'border-blue-500 text-gray-900' 
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                Dashboard
+              </Link>
+              </>
               )}
             </div>
           </div>
@@ -91,12 +113,22 @@ const Navbar: React.FC = () => {
                 </Link>
               </>
             ) : (
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
-              >
-                Log out
-              </button>
+              <div className="ml-3 relative flex items-center">
+                <div className="flex items-center">
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                  {/* <span className="ml-2 text-sm font-medium text-gray-700 hidden md:block">{user?.name || mockUser.name}</span> */}
+                  <button 
+                    onClick={handleLogout}
+                    className="ml-4 px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded-md flex items-center"
+                  >
+                    <LogOut className="mr-1 h-4 w-4" /> Log out
+                  </button>
+                </div>
+              </div>
             )}
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
@@ -194,6 +226,8 @@ const Navbar: React.FC = () => {
         </div>
       )}
     </nav>
+
+    
   );
 };
 
