@@ -10,18 +10,18 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // const navigate = useNavigate();
+  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate('/');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     await logout();
+  //     navigate('/');
+  //   } catch (error) {
+  //     console.error('Error logging out:', error);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100">

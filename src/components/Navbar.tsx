@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, DollarSign, LogOut } from 'lucide-react';
-import { mockUser } from '../data/mockData';
+// import { mockUser } from '../data/mockData';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
             {!isAuthenticated ? 
               <Link to="/" className="flex items-center">
                 <DollarSign className="h-8 w-8 text-blue-600" />
-                <span className="ml-2 text-xl font-bold text-gray-900">FundingFinder test</span>
+                <span className="ml-2 text-xl font-bold text-gray-900">FundingFinder</span>
               </Link>
               :
               <Link to="/dashboard" className="flex items-center">
@@ -184,19 +184,7 @@ const Navbar: React.FC = () => {
             >
               Pricing
             </Link>
-            {isAuthenticated && (
-              <Link
-                to="/dashboard"
-                className={`${
-                  isDashboard
-                    ? 'bg-blue-50 border-blue-500 text-blue-700'
-                    : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
-                } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
-                onClick={() => setIsOpen(false)}
-              >
-                Dashboard
-              </Link>
-            )}
+           
             {!isAuthenticated ? (
               <>
                 <Link
